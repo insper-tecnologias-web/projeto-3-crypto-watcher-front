@@ -1,0 +1,43 @@
+.title a:hover,
+.title a:focus,
+.title a:active {
+    text-decoration: underline;
+}
+
+.title {
+    margin: 0;
+    line-height: 1.15;
+    font-size: 3rem;
+}
+
+.title,
+.description {
+    text-align: center;
+}
+
+
+.borderCircle {
+    border-radius: 9999px;
+}
+
+/* Make the AppBar class diplay flex */
+.AppBar {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.2);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.profileDropdown {
+    background: none !important;
+    border: none !important;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
