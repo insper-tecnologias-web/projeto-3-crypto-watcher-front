@@ -10,12 +10,6 @@ export default function CryptoPage({ currency }) {
   const router = useRouter()
   const cripto = router.query.cid
   const [symbol, setSymbol] = useState('')
-  var requestOptions = {
-    method: 'GET',
-    redirect: 'follow',
-    Authorization: "Bearer "+process.env.API_KEY
-  };
-
   useEffect(() => {
     let listValues = []
     for (let value of currency) {
@@ -25,7 +19,7 @@ export default function CryptoPage({ currency }) {
       })
     }
     setValores(listValues)
-    fetch('https://api.coincap.io/v2/assets/'+cripto, requestOptions).then(res => res.json()).then(res=>setSymbol(res.data.symbol));
+    fetch('https://api.coincap.io/v2/assets/'+cripto, {Authorization: "Bearer "+process.env.API_KEY}).then(res => res.json()).then(res=>setSymbol(res.data.symbol));
   }, [])
 
   return (
@@ -38,12 +32,7 @@ export default function CryptoPage({ currency }) {
 }
 
 export async function getStaticPaths() {
-  var requestOptions = {
-    method: 'GET',
-    redirect: 'follow',
-    Authorization: "Bearer "+process.env.API_KEY
-  };
-  const currencies = await fetch('https://api.coincap.io/v2/assets', requestOptions).then(res => res.json());
+  const currencies = await fetch('https://api.coincap.io/v2/assets', {Authorization: "Bearer "+process.env.API_KEY}).then(res => res.json());
   const paths = currencies.data.map(currency => {
     const currencyId = currency.id.toLowerCase();
     return {
@@ -58,13 +47,8 @@ export async function getStaticPaths() {
   }
 }
 export async function getStaticProps({ params }) {
-  var requestOptions = {
-    method: 'GET',
-    redirect: 'follow',
-    Authorization: "Bearer "+process.env.API_KEY
-  };
   const currencyId = params.cid
-  const results = await fetch(`https://api.coincap.io/v2/assets/${currencyId}/history?interval=d1`, requestOptions).then(res => res.json());
+  const results = await fetch(`https://api.coincap.io/v2/assets/${currencyId}/history?interval=d1`, {Authorization:"Bearer "+ process.env.API_KEY}).then(res => res.json());
   return {
     props: {
       currency: results.data
