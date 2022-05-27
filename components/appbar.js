@@ -9,8 +9,8 @@ export default function AppBar() {
         <div className={styles.AppBar}>
             <h1>CryptoWatchers - Crypto Dashboard</h1>
             <Dropdown
-                caret
-                nav
+                caret="true"
+                nav="true"
                 onClick={(e) => e.preventDefault()}>
                 <Dropdown.Toggle className={styles.profileDropdown} id="dropdown-basic">
                     <Image src="/perfil.png" alt="User" width={72} height={72}

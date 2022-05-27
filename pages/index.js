@@ -2,20 +2,17 @@ import Head from 'next/head';
 import Image from 'next/image';
 import styles from '../styles/Home.module.css';
 import AppBar from '../components/appbar';
+import Link from 'next/link';
+import Button from 'react-bootstrap/Button';
+
+function formatNumber(num) {
+  return num.toLocaleString('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 8 });
+}
 
 export default function Home({ data }) {
 
   console.log(data.data[0]);
-  // Make a style to center the elements inside 
-  const styleCenter = {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: '100%',
-    flexWrap: 'wrap',
-    color: 'white',
-  }
+  console.log(formatNumber(data.data[0].priceUsd));
 
   return (
     <div className={styles.container}>
@@ -28,18 +25,21 @@ export default function Home({ data }) {
       <AppBar></AppBar>
       <main className={styles.main}>
         <h2 style={{ marginTop: '1.5rem' }}><b>Principais cryptos: </b></h2>
-        <div style={{ ...styleCenter, marginTop: '1rem' }}>
+        <div className={styles.styleCenter} >
           {data.data.slice(0, 20).map(item => (
-            <div className={styles.glass} key={`Item__${item.id}`}>
+            <div className={`${styles.glass} ${styles.card}`} key={`Item__${item.id}`}>
               <h3>{item.name} ({item.symbol})</h3>
-              <p>$ {parseFloat(item.priceUsd)}</p>
+              <p>{formatNumber(parseFloat(item.priceUsd))}</p>
               <p style={{ color: (item.changePercent24Hr > 0) ? 'green' : 'red', }}>
                 {parseFloat(item.changePercent24Hr).toFixed(2)} %
               </p>
+              <Link href={`criptos/${item.id}`}>
+                <Button variant="outline-light">See details</Button>
+              </Link>
             </div>
           ))}
         </div>
-      </main>
+      </main >
 
       <footer className={styles.footer}>
         <a
@@ -53,14 +53,14 @@ export default function Home({ data }) {
           </span>
         </a>
       </footer>
-    </div>
+    </div >
   )
 }
 
 // This gets called on every request
 export async function getServerSideProps() {
   // Fetch data from external API
-  const res = await fetch('https://api.coincap.io/v2/assets');
+  const res = await fetch('https://api.coincap.io/v2/assets', { Authorization: process.env.API_KEY });
   const data = await res.json();
 
   // Pass data to the page via props

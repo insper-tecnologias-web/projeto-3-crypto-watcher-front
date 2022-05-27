@@ -4,22 +4,20 @@ import styles from '../styles/portfolio.module.css'
 
 export default function Portfolio(params) {
     const router = useRouter()
-    const { 
+    const {
         query: { username }
     } = router
 
     return (
         <div className={styles.container}>
             <div className={styles.profile}>
-                <link href="/login">
+                <Link href="/login">
                     <p>PERFIL</p>
-                </link>
+                </Link>
             </div>
             <div>
                 <h1>Portfolio</h1>
-
             </div>
-
         </div>
     )
 }
