@@ -2,11 +2,19 @@ import dynamic from 'next/dynamic'
 const StockChart = dynamic(() => import("/lib/StockChart/StockChart"), { ssr: false })
 import React, { useEffect, useState } from 'react'
 import moment from 'moment'
-
+import { useRouter } from 'next/router'
 
 
 export default function CryptoPage({ currency }) {
   const [valores, setValores] = useState([])
+  const router = useRouter()
+  const cripto = router.query.cid
+  const [symbol, setSymbol] = useState('')
+  var requestOptions = {
+    method: 'GET',
+    redirect: 'follow',
+    Authorization: "Bearer "+process.env.API_KEY
+  };
 
   useEffect(() => {
     let listValues = []
@@ -17,14 +25,13 @@ export default function CryptoPage({ currency }) {
       })
     }
     setValores(listValues)
+    fetch('https://api.coincap.io/v2/assets/'+cripto, requestOptions).then(res => res.json()).then(res=>setSymbol(res.data.symbol));
   }, [])
-  console.log(valores)
-  console.log(moment(currency[0].time).format("YYYY-MM-DD"))
 
   return (
     <>
       <h2>
-        <StockChart dataPoints={valores} />
+        <StockChart title={symbol} dataPoints={valores} />
       </h2>
     </>
   )
@@ -34,7 +41,7 @@ export async function getStaticPaths() {
   var requestOptions = {
     method: 'GET',
     redirect: 'follow',
-    Authorization: "Bearer a3500fc0-6930-4cd0-9546-e31b3fec9ebb"
+    Authorization: "Bearer "+process.env.API_KEY
   };
   const currencies = await fetch('https://api.coincap.io/v2/assets', requestOptions).then(res => res.json());
   const paths = currencies.data.map(currency => {
@@ -54,7 +61,7 @@ export async function getStaticProps({ params }) {
   var requestOptions = {
     method: 'GET',
     redirect: 'follow',
-    Authorization: "Bearer a3500fc0-6930-4cd0-9546-e31b3fec9ebb"
+    Authorization: "Bearer "+process.env.API_KEY
   };
   const currencyId = params.cid
   const results = await fetch(`https://api.coincap.io/v2/assets/${currencyId}/history?interval=d1`, requestOptions).then(res => res.json());
