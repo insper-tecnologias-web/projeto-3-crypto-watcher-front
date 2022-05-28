@@ -4,15 +4,16 @@ import styles from '../styles/Home.module.css';
 import AppBar from '../components/appbar';
 import Link from 'next/link';
 import Button from 'react-bootstrap/Button';
+import { useRef } from 'react';
 
 function formatNumber(num) {
   return num.toLocaleString('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 8 });
 }
 
 export default function Home({ data }) {
-
+  const ref = useRef(null);
   console.log(data.data[0]);
-  console.log(formatNumber(data.data[0].priceUsd));
+  const scrollToMain = () => ref.current.scrollIntoView(true, { behavior: 'smooth' });
 
   return (
     <div className={styles.container}>
@@ -24,20 +25,28 @@ export default function Home({ data }) {
       </Head>
       <AppBar></AppBar>
       <main className={styles.main}>
-        <h2 style={{ marginTop: '1.5rem' }}><b>Principais cryptos: </b></h2>
-        <div className={styles.styleCenter} >
-          {data.data.slice(0, 20).map(item => (
-            <div className={`${styles.glass} ${styles.card}`} key={`Item__${item.id}`}>
-              <h3>{item.name} ({item.symbol})</h3>
-              <p>{formatNumber(parseFloat(item.priceUsd))}</p>
-              <p style={{ color: (item.changePercent24Hr > 0) ? 'green' : 'red', }}>
-                {parseFloat(item.changePercent24Hr).toFixed(2)} %
-              </p>
-              <Link href={`criptos/${item.id}`}>
-                <Button variant="outline-light">See details</Button>
-              </Link>
-            </div>
-          ))}
+        <div className={`${styles.landingPage} bg-image`}>
+          <div className={`${styles.landingContent} ${styles.glass}`}>
+            <h2>Welcome to your crypto Dashboard!</h2>
+            <Button onClick={scrollToMain} variant='outline-light'>See the main cryptos.</Button>
+          </div>
+        </div>
+        <div style={{ marginTop: '0.5rem' }} ref={ref}>
+          <h2 style={{ marginTop: '1.5rem' }}><b>Main cryptos: </b></h2>
+          <div className={styles.styleCenter}>
+            {data.data.slice(0, 20).map(item => (
+              <div className={`${styles.glass} ${styles.card}`} key={`Item__${item.id}`}>
+                <h3>{item.name} ({item.symbol})</h3>
+                <p>{formatNumber(parseFloat(item.priceUsd))}</p>
+                <p style={{ color: (item.changePercent24Hr > 0) ? 'green' : 'red', }}>
+                  {parseFloat(item.changePercent24Hr).toFixed(2)} %
+                </p>
+                <Link href={`criptos/${item.id}`}>
+                  <Button variant="outline-light">See details</Button>
+                </Link>
+              </div>
+            ))}
+          </div>
         </div>
       </main >
 

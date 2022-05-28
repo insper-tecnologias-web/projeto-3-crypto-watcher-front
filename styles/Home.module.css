@@ -81,6 +81,10 @@
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  margin: 1rem;
+  padding: 1rem;
+  width: 15rem;
+  height: 15rem;
 }
 
 .card:hover,
@@ -122,10 +126,6 @@
   -webkit-backdrop-filter: blur(4px);
   border-radius: 10px;
   border: 1px solid rgba(255, 255, 255, 0.1);
-  margin: 1rem;
-  padding: 1rem;
-  width: 15rem;
-  height: 15rem;
 }
 
 .styleCenter {
@@ -136,4 +136,27 @@
   width: 100%;
   flex-wrap: wrap;
   margin-top: 1rem;
+}
+
+.landingPage {
+  background-image: url("../public/CryptoBg1.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  /* background-attachment: fixed; */
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.landingContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+
 }
