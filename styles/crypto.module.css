@@ -1,0 +1,38 @@
+.container{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    margin-bottom: 2rem;
+    margin-top: 2rem;
+}
+.info{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    color: white;
+    border-radius: 1.5rem;
+    box-shadow: 0px 3px 21px 5px rgba(0,0,0,0.35);
+    padding: 1rem;
+    width: 22%;
+    margin-right: 1rem;
+    font-family: 'Open Sans', sans-serif;
+}
+.chart{
+    border-radius: 1.5rem;
+    box-shadow: 0px 3px 21px 5px rgba(0,0,0,0.35);
+    padding: 1rem ;
+    width: 78%;
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+
+.info_content_value{
+    font-weight: 500;
+    color: rgb(177, 177, 177);
+}
+
+.info_content_title{
+    font-weight: 700;
+}
+
