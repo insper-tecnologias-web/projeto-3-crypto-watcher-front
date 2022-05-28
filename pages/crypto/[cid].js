@@ -44,7 +44,7 @@ export default function CryptoPage({ currency }) {
             <h3 className={styles.info_content_title}>Price USD:</h3>
             <p className={styles.info_content_value}>${(Math.round(cryptoData.priceUsd * 100) / 100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</p>
             <h3 className={styles.info_content_title}>Price Change 24h:</h3>
-            <p style={{ color: cryptoData.changePercent24Hr > 0 ? 'green' : 'red', fontWeight: '500' }}>
+            <p style={{ color: cryptoData.changePercent24Hr > 0 ? 'green' : 'red', fontWeight: '700' }}>
               {(Math.round(cryptoData.changePercent24Hr * 100) / 100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}%
             </p>
             <h3 className={styles.info_content_title}>Volume USD 24h:</h3>
