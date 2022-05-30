@@ -1,7 +1,3 @@
-.container {
-  /* padding: 0 2rem; */
-}
-
 .main {
   min-height: 100vh;
   padding: 0 1rem 4rem 1rem;
@@ -120,8 +116,10 @@
 }
 
 .glass {
-  background: rgba(255, 255, 255, 0.1);
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.25);
+  /* background: rgba(255, 255, 255, 0.1); */
+  background: rgba(10, 10, 10, 0.25);
+  background-image: linear-gradient(to bottom left, #2B2B2B, #1B1B1B);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.05);
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
   border-radius: 10px;
@@ -158,5 +156,7 @@
   justify-content: center;
   align-items: center;
   padding: 1rem;
-
+  background: rgba(255, 255, 255, 0.01);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
 }
