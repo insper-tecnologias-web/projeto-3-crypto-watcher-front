@@ -1,10 +1,10 @@
 .container {
-  padding: 0 2rem;
+  /* padding: 0 2rem; */
 }
 
 .main {
   min-height: 100vh;
-  padding: 4rem 0;
+  padding: 0 1rem 4rem 1rem;
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -42,7 +42,7 @@
 .title {
   margin: 0;
   line-height: 1.15;
-  font-size: 4rem;
+  font-size: 3rem;
 }
 
 .title,
@@ -74,15 +74,17 @@
 }
 
 .card {
-  margin: 1rem;
-  padding: 1.5rem;
   text-align: left;
   color: inherit;
   text-decoration: none;
-  border: 1px solid #eaeaea;
-  border-radius: 10px;
-  transition: color 0.15s ease, border-color 0.15s ease;
-  max-width: 300px;
+  transition: color 0.15s ease-in, border-color 0.15s ease-in;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  margin: 1rem;
+  padding: 1rem;
+  width: 15rem;
+  height: 15rem;
 }
 
 .card:hover,
@@ -92,15 +94,17 @@
   border-color: #0070f3;
 }
 
-.card h2 {
-  margin: 0 0 1rem 0;
+.card h2,
+.card h3 {
   font-size: 1.5rem;
+  cursor: default;
 }
 
 .card p {
   margin: 0;
   font-size: 1.25rem;
   line-height: 1.5;
+  cursor: default;
 }
 
 .logo {
@@ -113,4 +117,46 @@
     width: 100%;
     flex-direction: column;
   }
+}
+
+.glass {
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.25);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.styleCenter {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}
+
+.landingPage {
+  background-image: url("../public/CryptoBg1.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  /* background-attachment: fixed; */
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.landingContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+
 }
