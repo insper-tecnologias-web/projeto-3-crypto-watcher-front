@@ -15,6 +15,11 @@ export default function AppBar() {
                     <Image src="/perfil.png" alt="User" width={72} height={72}
                         className={`${styles.borderCircle}`} />
                 </Dropdown.Toggle>
+                <Dropdown.Menu>
+                    <Dropdown.Item href="#/action-1">Profile</Dropdown.Item>
+                    <Dropdown.Item href="#/action-2">Portfolio</Dropdown.Item>
+                    <Dropdown.Item href="#/action-3">Something</Dropdown.Item>
+                </Dropdown.Menu>
             </Dropdown>
         </div>
     );

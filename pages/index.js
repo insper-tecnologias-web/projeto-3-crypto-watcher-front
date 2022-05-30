@@ -25,10 +25,12 @@ export default function Home({ data }) {
       </Head>
       <AppBar></AppBar>
       <main className={styles.main}>
-        <div className={`${styles.landingPage} bg-image`}>
-          <div className={`${styles.landingContent} ${styles.glass}`}>
+        <div className={`${styles.landingPage}`}>
+          <div className={`${styles.landingContent}`}>
             <h2>Welcome to your crypto Dashboard!</h2>
-            <Button onClick={scrollToMain} variant='outline-light'>See the main cryptos.</Button>
+            <Button style={{ fontWeight: 'bold' }} onClick={scrollToMain} variant='outline-light'>
+              See the main cryptos.
+            </Button>
           </div>
         </div>
         <div style={{ marginTop: '0.5rem' }} ref={ref}>
@@ -41,7 +43,7 @@ export default function Home({ data }) {
                 <p style={{ color: (item.changePercent24Hr > 0) ? 'green' : 'red', }}>
                   {parseFloat(item.changePercent24Hr).toFixed(2)} %
                 </p>
-                <Link href={`criptos/${item.id}`}>
+                <Link href={`crypto/${item.id}`}>
                   <Button variant="outline-light">See details</Button>
                 </Link>
               </div>
