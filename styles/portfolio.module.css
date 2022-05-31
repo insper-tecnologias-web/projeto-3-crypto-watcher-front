@@ -1,3 +1,59 @@
-.container {
-    background-color: black;
-}
+.card {
+    text-align: left;
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.15s ease-in, border-color 0.15s ease-in;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin: 1rem;
+    padding: 1rem;
+    height: 5rem;
+  }
+  
+  .card:hover,
+  .card:focus,
+  .card:active {
+    color: #0070f3;
+    border-color: #0070f3;
+  }
+  
+  .card h2,
+  .card h3 {
+    font-size: 1.5rem;
+    cursor: default;
+  }
+  
+  .card p {
+    margin: 0;
+    font-size: 1.25rem;
+    line-height: 1.5;
+    cursor: default;
+  }
+
+  .glass {
+    /* background: rgba(255, 255, 255, 0.1); */
+    background: rgba(10, 10, 10, 0.25);
+    background-image: linear-gradient(to bottom left, #2B2B2B, #1B1B1B);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.05);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .divTable {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .headRow {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin: 1rem;
+    padding: 0rem 3rem 0rem 3rem;
+  
+    height: 2rem;
+    border-bottom: white;
+  }
