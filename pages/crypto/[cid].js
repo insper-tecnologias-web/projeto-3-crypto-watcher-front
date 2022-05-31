@@ -6,6 +6,7 @@ import moment from 'moment'
 import { useRouter } from 'next/router'
 import styles from '../../styles/crypto.module.css'
 import AppBar from '../../components/appbar';
+import Image from 'next/image';
 
 
 export default function CryptoPage({ currency }) {
