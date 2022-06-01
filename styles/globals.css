@@ -1,12 +1,11 @@
 html,
 body {
   padding: 0;
-  background-color: #121212;
   color: white;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-  background-color:  #2A2A2A;
+  background-color: #2A2A2A;
 }
 
 a {

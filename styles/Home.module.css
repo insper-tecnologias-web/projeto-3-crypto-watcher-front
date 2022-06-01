@@ -116,14 +116,21 @@
 }
 
 .glass {
-  /* background: rgba(255, 255, 255, 0.1); */
   background: rgba(10, 10, 10, 0.25);
-  background-image: linear-gradient(to bottom left, #2B2B2B, #1B1B1B);
+  background-image: linear-gradient(to left, #323232, #1B1B1B);
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.05);
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
   border-radius: 10px;
   border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.card:hover {
+  box-shadow: 10px 10px 7px rgba(0, 0, 0, 0.702);
+  transform: scale(1.15);
+  transition: transform 0.2s ease-in-out;
+  position: relative;
+  z-index: 5;
 }
 
 .styleCenter {
