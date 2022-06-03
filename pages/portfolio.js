@@ -42,7 +42,7 @@ export default function Userportfolio() {
                     <h3>Quantidade</h3>
                     <h3>Detalhes</h3>
                 </div>
-                <div class="rows">
+                <div className={styles.rows}>
                     {hardcode.map((coin) => (
                         <Linha key={`coin__${coin.id}`} props={coin}></Linha>
                     ))}
