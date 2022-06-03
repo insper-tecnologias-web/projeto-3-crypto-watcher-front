@@ -1,10 +1,10 @@
 import Head from 'next/head';
-import Image from 'next/image';
-import styles from '../styles/Home.module.css';
-import AppBar from '../components/appbar';
 import Link from 'next/link';
 import Button from 'react-bootstrap/Button';
 import { useRef } from 'react';
+import styles from '../styles/Home.module.css';
+import AppBar from '../components/appbar';
+import Footer from '../components/footer';
 
 function formatNumber(num) {
   return num.toLocaleString('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 8 });
@@ -38,11 +38,11 @@ export default function Home({ data }) {
           <div className={styles.styleCenter}>
             {data.data.slice(0, 20).map(item => (
               <div className={`${styles.glass} ${styles.card}`} key={`Item__${item.id}`}>
-                <h3>{item.name} ({item.symbol})</h3>
-                <p>{formatNumber(parseFloat(item.priceUsd))}</p>
-                <p style={{ color: (item.changePercent24Hr > 0) ? 'green' : 'red', }}>
+                <h3 style={{ marginTop: '0.7rem', alignSelf: 'center' }}>{item.name} ({item.symbol})</h3>
+                <p className={styles.percentChange} style={{ color: (item.changePercent24Hr > 0) ? 'green' : 'red' }}>
                   {parseFloat(item.changePercent24Hr).toFixed(2)} %
                 </p>
+                <p>{formatNumber(parseFloat(item.priceUsd))}</p>
                 <Link href={`crypto/${item.id}`}>
                   <Button variant="outline-light">See details</Button>
                 </Link>
@@ -51,19 +51,7 @@ export default function Home({ data }) {
           </div>
         </div>
       </main >
-
-      <footer className={styles.footer}>
-        <a
-          href="https://github.com/insper-tecnologias-web/projeto-3-crypto-watcher-front"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' GRPG'}
-          <span className={styles.logo}>
-            <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
-          </span>
-        </a>
-      </footer>
+      <Footer></Footer>
     </div >
   )
 }
