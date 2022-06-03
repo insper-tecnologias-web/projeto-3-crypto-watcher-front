@@ -1,3 +1,4 @@
+import AppBar from '../components/appbar';
 import Linha from '../components/linha';
 import styles from '../styles/portfolio.module.css';
 
@@ -9,28 +10,29 @@ export default function Userportfolio() {
     const name = 'Pedro';
     const hardcode = [
         {
-            id : 1,
-            ticker : 'BTC',
-            name:'bitcoin',
-            quant : 0.00002
+            id: 1,
+            ticker: 'BTC',
+            name: 'bitcoin',
+            quant: 0.00002
         },
         {
-            id : 2,
-            ticker : 'SOL',
-            name:'solana',
-            quant : 0.00089
+            id: 2,
+            ticker: 'SOL',
+            name: 'solana',
+            quant: 0.00089
         },
         {
-            id : 3,
-            ticker : 'ETH',
+            id: 3,
+            ticker: 'ETH',
             name: 'ethreum',
-            quant : 0.00082
+            quant: 0.00082
         },
     ];
 
     return (
         <div>
-            <div>
+            <AppBar></AppBar>
+            <div style={{ marginTop: '1rem' }}>
                 <h1>Portfolio do {name}</h1>
             </div>
             <div className={styles.divTable}>
@@ -40,9 +42,9 @@ export default function Userportfolio() {
                     <h3>Quantidade</h3>
                     <h3>Detalhes</h3>
                 </div>
-                <div class="rows">
-                    {hardcode.map((coin)=>(
-                        <Linha key={`coin__${coin.id}`}  props={coin}></Linha>
+                <div className={styles.rows}>
+                    {hardcode.map((coin) => (
+                        <Linha key={`coin__${coin.id}`} props={coin}></Linha>
                     ))}
                 </div>
             </div>

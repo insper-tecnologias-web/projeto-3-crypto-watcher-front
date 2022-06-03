@@ -4,13 +4,11 @@ import styles from '../styles/AppBar.module.css';
 import { useRouter } from "next/router"
 
 export default function AppBar() {
-    const ObjectData = {BTC:0.1,ETH:9};
     const router = useRouter()
-    const name = "Pedro Lindo";
-    
+
     return (
         <div className={styles.AppBar}>
-            <h1>CryptoWatchers - Crypto Dashboard</h1>
+            <h1>CryptoWatchers</h1>
             <Dropdown
                 caret="true"
                 nav="true"

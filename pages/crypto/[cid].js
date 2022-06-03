@@ -49,7 +49,7 @@ export default function CryptoPage({ currency }) {
             <h2 style={{ marginTop: 0 }}>{cryptoData.name}</h2>
             <h4> Balance:</h4>
             <h5> 10 {cryptoData.symbol}</h5>
-            <p style={{color: "rgb(177, 177, 177)"}}> ≈ $ 10</p>
+            <p style={{ color: "rgb(177, 177, 177)" }}> ≈ $ 10</p>
           </div>
           <div className={styles.info_content}>
             <div className={styles.info_content_item}>
