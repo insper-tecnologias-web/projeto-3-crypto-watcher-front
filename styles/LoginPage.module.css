@@ -1,0 +1,45 @@
+.formPaper {
+    background-color: rgb(58, 58, 58, 1);
+    border-radius: 10px;
+    width: 40%;
+    padding: 1rem;
+    margin-top: 25vh;
+    color: var(--medium-emphasis);
+    font-size: 1.25rem;
+}
+
+.formContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+.formGroup {
+    margin-top: 1.25rem;
+}
+
+.container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.inputStyle {
+    background-color: rgb(60, 60, 60, 1);
+    color: white;
+    border: none;
+    border-bottom: 1px solid var(--medium-emphasis);
+}
+
+.inputStyle:focus {
+    background-color: rgb(58, 58, 58, 1);
+    caret-color: white;
+    color: var(--medium-emphasis);
+}
+
+.iconContainer {
+    background: none;
+    background-color: rgb(60, 60, 60, 1);
+    border: none;
+    border-bottom: 1px solid var(--medium-emphasis);
+}

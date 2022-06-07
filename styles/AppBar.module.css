@@ -15,30 +15,35 @@
     text-align: center;
 }
 
-
-.borderCircle {
-    border-radius: 9999px;
-}
-
-/* Make the AppBar class diplay flex */
 .AppBar {
-    width: 100%;
     display: flex;
+    width: 100%;
     flex-direction: row;
     align-items: center;
-    justify-content: space-around;
-    background: rgba(255, 255, 255, 0.1);
-    background: rgba(0, 0, 0, 0.2);
-    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.2);
+    justify-content: space-between;
+    background: #1C1C1C;
     backdrop-filter: blur(4px);
     -webkit-backdrop-filter: blur(4px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    min-height: 4rem;
 }
 
-.profileDropdown {
-    background: none !important;
-    border: none !important;
+
+.AppBar_logo {
     display: flex;
     flex-direction: row;
     align-items: center;
+    cursor: pointer;
+    padding-left: 1rem;
+}
+
+.AppBar_title {
+    margin-left: 1rem;
+    font-size: 1.75rem;
+    margin-bottom: 0.35rem;
+}
+
+.AppBar_wallet {
+    cursor: pointer;
+    padding-right: 1rem;
+    margin-bottom: 0.25rem;
 }

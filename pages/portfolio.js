@@ -1,3 +1,4 @@
+import AppBar from '../components/appbar';
 import Linha from '../components/linha';
 import styles from '../styles/portfolio.module.css';
 import { useRouter } from "next/router"
@@ -7,18 +8,18 @@ import React, { useEffect, useState } from 'react'
 export default function Userportfolio({cryptos}) {
     const router = useRouter();
     const user = router.query;
-    const [cryptosN,setCryptosN] = useState([]);
-    const [cryptovalues,setCryptovalues] = useState([]);
+    const [cryptosN, setCryptosN] = useState([]);
+    const [cryptovalues, setCryptovalues] = useState([]);
 
     const loadCryptovalues = () => {
         for (var obj of cryptos) {
             let name = obj.crypto;
             fetch('https://api.coincap.io/v2/assets/' + name, 
             { Authorization: "Bearer " + process.env.API_KEY })
-            .then(res=>res.json())
+            .then(res => res.json())
             .then(res => cryptovalues.push(res.data));            
         }
-        console.log(cryptovalues)
+        console.log(cryptovalues);
     }
     
     useEffect(()=>{
@@ -27,6 +28,7 @@ export default function Userportfolio({cryptos}) {
 
     return (
         <div>
+            <AppBar></AppBar>
             <div>
                 <h1>Portfolio do {user.email}</h1>
             </div>
@@ -34,15 +36,12 @@ export default function Userportfolio({cryptos}) {
                 <div className={styles.headRow}>
                     <h3>ID</h3>
                     <h3>Ticker</h3>
-                    <h3>Quantidade</h3>
-                    <h3>Detalhes</h3>
+                    <h3>Quantity</h3>
+                    <h3>Details</h3>
                 </div>
-                <div>
-                    <h1>California dream</h1>
-                </div>
-            </div>
+             </div>
         </div>
-    )
+    );
 }
 
 export async function getServerSideProps(context) {
