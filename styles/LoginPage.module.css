@@ -28,18 +28,32 @@
     background-color: rgb(60, 60, 60, 1);
     color: white;
     border: none;
-    border-bottom: 1px solid var(--medium-emphasis);
+    border-bottom: 2px solid var(--medium-emphasis);
 }
 
 .inputStyle:focus {
     background-color: rgb(58, 58, 58, 1);
     caret-color: white;
     color: var(--medium-emphasis);
+    box-shadow: none;
+    border-bottom: solid #0070f3;
 }
 
 .iconContainer {
     background: none;
     background-color: rgb(60, 60, 60, 1);
     border: none;
-    border-bottom: 1px solid var(--medium-emphasis);
+    border-bottom: 2px solid var(--medium-emphasis);
+}
+
+.registerText {
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.accountText {
+    color: var(--medium-emphasis);
+    font-weight: bold;
+    margin-top: 2rem;
 }
