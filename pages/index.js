@@ -13,6 +13,7 @@ function formatNumber(num) {
 export default function Home({ data }) {
   const ref = useRef(null);
   const scrollToMain = () => ref.current.scrollIntoView(true, { behavior: 'smooth' });
+  const allCoins = data.data;
 
   const TrendArrow = ({ change }) => {
     if (change > 0) {
@@ -47,7 +48,7 @@ export default function Home({ data }) {
         <div style={{ marginTop: '0.5rem' }} ref={ref}>
           <h2 style={{ marginTop: '1.5rem' }}><b>Main cryptos: </b></h2>
           <div className={styles.styleCenter}>
-            {data.data.slice(0, 20).map(item => (
+            {allCoins.slice(0, 20).map(item => (
               <div className={`${styles.glass} ${styles.card}`} key={`Item__${item.id}`}>
                 <h3 style={{ marginTop: '0.7rem', alignSelf: 'center' }}>{item.name} ({item.symbol})</h3>
                 <p className={styles.percentChange} style={{ color: (item.changePercent24Hr > 0) ? 'green' : 'red' }}>

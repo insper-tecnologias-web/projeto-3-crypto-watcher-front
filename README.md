@@ -8,6 +8,7 @@
 [![Product Name Screen Shot][product-screenshot]](https://example.com)
 
 CryptoWatchers is a project made for tracking crypto prices and managing portfolio, it was made also for the last project of the Web Technologies subject at Insper. You can see the demo live demo at **cryptowatchers.vercel.app/**.
+To see the backend of the project, [click here](https://github.com/guifl2001/projeto-3-crypto-watcher-backend).
 
 ### Built With
 
@@ -59,9 +60,9 @@ This project offer many features, some are listed below:
 ## Contact
 
 - [Ricardo Ribeiro Rodrigues](https://github.com/RicardoRibeiroRodrigues) - ricardorr7@al.insper.edu.br     
-- [Guilherme Fontana Louro](https://github.com/guifl2001) - {email-insper}      
-- [Giancarlo Vannoni Rugiero](https://github.com/Gian2608) - {email}      
-- [Pedro Altobelli Pinto](https://github.com/pedroaltobelli23) - {email}      
+- [Guilherme Fontana Louro](https://github.com/guifl2001) - guilhermefl3@al.insper.edu.br        
+- [Giancarlo Vannoni Rugiero](https://github.com/Gian2608) - giancarlovr@al.insper.edu.br    
+- [Pedro Altobelli Pinto](https://github.com/pedroaltobelli23) - pedroatp@al.insper.edu.br            
 
 Project Link: [https://github.com/insper-tecnologias-web/projeto-3-crypto-watcher-front](https://github.com/insper-tecnologias-web/projeto-3-crypto-watcher-front)
 
@@ -88,4 +89,4 @@ Project Link: [https://github.com/insper-tecnologias-web/projeto-3-crypto-watche
 [issues-url]: https://github.com/insper-tecnologias-web/projeto-3-crypto-watcher-front/issues
 [license-shield]: https://img.shields.io/github/license/insper-tecnologias-web/projeto-3-crypto-watcher-front.svg?style=flat-square
 [license-url]: https://github.com/insper-tecnologias-web/projeto-3-crypto-watcher-front/blob/master/LICENSE.txt
-[product-screenshot]: docs/cover.jpg
+[product-screenshot]: Imgs/ProjectLogo.png
