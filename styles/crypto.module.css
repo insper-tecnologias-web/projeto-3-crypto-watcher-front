@@ -37,3 +37,25 @@
 .info_content_title {
     font-weight: 700;
 }
+
+@media screen and (max-width:900px){
+    .container{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        margin-bottom: 2rem;
+        margin-top: 2rem;
+    }
+    .chart{
+        width: auto;
+        margin-left: 1rem;
+        margin-right: 1rem;
+    }
+    
+    .info{
+        width: auto;
+        margin-left: 1rem;
+        margin-right: 1rem;
+        margin-top: 2rem;
+    }
+}
