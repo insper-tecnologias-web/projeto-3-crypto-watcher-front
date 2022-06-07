@@ -102,11 +102,6 @@ export async function getStaticProps({ params }) {
   const currencyId = params.cid
   const results = await fetch(`https://api.coincap.io/v2/assets/${currencyId}/history?interval=d1`,{ headers:{ Authorization: "Bearer " + process.env.API_KEY }}).then(res => res.json());
   const balance = await axios.get('https://infinite-eyrie-41468.herokuapp.com/cryptos', { headers:{ Authorization: "Bearer " + process.env.BACK_KEY }});
-  // const result_balance = await fetch(`https://infinite-eyrie-41468.herokuapp.com/cryptos/`, {
-  //   headers: {
-  //     Authorization: "Bearer " + process.env.BACK_KEY
-  //   }
-  // }).then(res => console.log(res));
  
   return {
     props: {
