@@ -6,14 +6,18 @@ import moment from 'moment'
 import { useRouter } from 'next/router'
 import styles from '../../styles/crypto.module.css'
 import AppBar from '../../components/appbar';
+import axios from 'axios';
 
 
-export default function CryptoPage({ currency }) {
+export default function CryptoPage({ currency, balance }) {
   const [values, setValues] = useState([])
   const router = useRouter()
   const cripto = router.query.cid
   const [cryptoData, setCrytoData] = useState('')
   const [symbol, setSymbol] = useState('')
+  const [balanceCrypto, setBalanceCrypto] = useState(0)
+  const [dolar, setDolar] = useState(0)
+
   useEffect(() => {
     let listValues = []
     for (let value of currency) {
@@ -21,6 +25,9 @@ export default function CryptoPage({ currency }) {
         x: new Date(moment(value.time).format("YYYY-MM-DD").toString()),
         y: parseFloat(value.priceUsd)
       })
+      if (listValues.length === currency.length) {
+        setDolar(parseFloat(value.priceUsd))
+      }
     }
     setValues(listValues)
     fetch('https://api.coincap.io/v2/assets/' + cripto, { Authorization: "Bearer " + process.env.API_KEY })
@@ -29,6 +36,11 @@ export default function CryptoPage({ currency }) {
         setCrytoData(res.data)
         setSymbol(res.data.symbol)
       });
+      for (let value of balance) {
+        if (value.crypto === cripto) {
+          setBalanceCrypto(value.quantity)
+        }
+      }
   }, [])
 
   return (
@@ -48,8 +60,8 @@ export default function CryptoPage({ currency }) {
           <div className={styles.info_title}>
             <h2 style={{ marginTop: 0 }}>{cryptoData.name}</h2>
             <h4> Balance:</h4>
-            <h5> 10 {cryptoData.symbol}</h5>
-            <p style={{ color: "rgb(177, 177, 177)" }}> ≈ $ 10</p>
+            <h5> {(Math.round(balanceCrypto * 100) / 100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} {cryptoData.symbol}</h5>
+            <p style={{ color: "rgb(177, 177, 177)" }}> ≈ $ {(Math.round(balanceCrypto*dolar * 100) / 100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</p>
           </div>
           <div className={styles.info_content}>
             <div className={styles.info_content_item}>
@@ -72,7 +84,7 @@ export default function CryptoPage({ currency }) {
 }
 
 export async function getStaticPaths() {
-  const currencies = await fetch('https://api.coincap.io/v2/assets', { Authorization: "Bearer " + process.env.API_KEY }).then(res => res.json());
+  const currencies = await fetch('https://api.coincap.io/v2/assets', { 'Authorization': "Bearer " + process.env.API_KEY }).then(res => res.json());
   const paths = currencies.data.map(currency => {
     const currencyId = currency.id.toLowerCase();
     return {
@@ -88,10 +100,13 @@ export async function getStaticPaths() {
 }
 export async function getStaticProps({ params }) {
   const currencyId = params.cid
-  const results = await fetch(`https://api.coincap.io/v2/assets/${currencyId}/history?interval=d1`, { Authorization: "Bearer " + process.env.API_KEY }).then(res => res.json());
+  const results = await fetch(`https://api.coincap.io/v2/assets/${currencyId}/history?interval=d1`,{ headers:{ Authorization: "Bearer " + process.env.API_KEY }}).then(res => res.json());
+  const balance = await axios.get('https://infinite-eyrie-41468.herokuapp.com/cryptos', { headers:{ Authorization: "Bearer " + process.env.BACK_KEY }});
+ 
   return {
     props: {
-      currency: results.data
+      currency: results.data,
+      balance : balance.data
     }
   }
 }
