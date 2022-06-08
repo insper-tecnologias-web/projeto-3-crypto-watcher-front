@@ -21,14 +21,6 @@ To see the backend of the project, [click here](https://github.com/guifl2001/pro
 
 To get a local copy up and running follow these simple steps.
 
-### Prerequisites
-
-This is an example of how to list things you need to use the software and how to install them.
-* Git
-```sh
-sudo apt-get install git
-```
-
 ### Installation
  
 1. Clone the repo
