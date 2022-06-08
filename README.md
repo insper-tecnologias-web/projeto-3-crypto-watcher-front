@@ -61,7 +61,7 @@ This project offer many features, some are listed below:
 
 - [Ricardo Ribeiro Rodrigues](https://github.com/RicardoRibeiroRodrigues) - ricardorr7@al.insper.edu.br     
 - [Guilherme Fontana Louro](https://github.com/guifl2001) - guilhermefl3@al.insper.edu.br        
-- [Giancarlo Vannoni Rugiero](https://github.com/Gian2608) - giancarlovr@al.insper.edu.br    
+- [Giancarlo Vanoni Ruggiero](https://github.com/Gian2608) - giancarlovr@al.insper.edu.br    
 - [Pedro Altobelli Pinto](https://github.com/pedroaltobelli23) - pedroatp@al.insper.edu.br            
 
 Project Link: [https://github.com/insper-tecnologias-web/projeto-3-crypto-watcher-front](https://github.com/insper-tecnologias-web/projeto-3-crypto-watcher-front)
