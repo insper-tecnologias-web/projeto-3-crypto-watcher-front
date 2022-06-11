@@ -21,14 +21,6 @@ To see the backend of the project, [click here](https://github.com/guifl2001/pro
 
 To get a local copy up and running follow these simple steps.
 
-### Prerequisites
-
-This is an example of how to list things you need to use the software and how to install them.
-* Git
-```sh
-sudo apt-get install git
-```
-
 ### Installation
  
 1. Clone the repo
@@ -68,7 +60,7 @@ This project offer many features, some are listed below:
 
 - [Ricardo Ribeiro Rodrigues](https://github.com/RicardoRibeiroRodrigues) - ricardorr7@al.insper.edu.br     
 - [Guilherme Fontana Louro](https://github.com/guifl2001) - guilhermefl3@al.insper.edu.br        
-- [Giancarlo Vannoni Rugiero](https://github.com/Gian2608) - giancarlovr@al.insper.edu.br    
+- [Giancarlo Vanoni Ruggiero](https://github.com/Gian2608) - giancarlovr@al.insper.edu.br    
 - [Pedro Altobelli Pinto](https://github.com/pedroaltobelli23) - pedroatp@al.insper.edu.br            
 
 Project Link: [https://github.com/insper-tecnologias-web/projeto-3-crypto-watcher-front](https://github.com/insper-tecnologias-web/projeto-3-crypto-watcher-front)
