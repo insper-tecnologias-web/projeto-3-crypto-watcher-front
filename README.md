@@ -48,6 +48,13 @@ npm run dev
 <!-- USAGE EXAMPLES -->
 ## Usage
 
+Feature list:
+- Backend made in ruby on rails (2pts);
+- User authentication (2pts);
+- FrontEnd made with next.js (2pts);
+- Graphs for the cryptos in the crypto page (2pts);
+- Listing cryptos from the coinCap API (1pt).
+
 This project offer many features, some are listed below:
 - Seeing the main cryptos and their price/price variation:
 ![Main cryptos pic](Imgs/mainCryptos.png)
