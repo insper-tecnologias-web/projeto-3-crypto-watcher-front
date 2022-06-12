@@ -22,6 +22,6 @@ export default function AppBar() {
             })}>
                 {router.pathname !== '/portfolio' && <Image src="/carteira.png" alt="Wallet" width={50} height={50} />}
             </div>
-        </div>
+        </div >
     );
 }

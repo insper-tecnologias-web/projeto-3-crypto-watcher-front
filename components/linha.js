@@ -15,6 +15,5 @@ export default function Linha(props) {
                 </Link>
             </div>
         </div>
-    )
+    );
 }
-
