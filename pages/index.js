@@ -37,11 +37,11 @@ export default function Home({ data }) {
             <h2>Welcome to your crypto Dashboard!</h2>
             <div className={styles.landingButtons}>
               <Button style={{ margin: '1rem 1.5rem 1.5rem 0rem', fontWeight: 'bold' }} onClick={scrollToMain} variant='outline-light'>
-                See the main cryptos.
+                See the main cryptos
               </Button>
               <Button style={{ margin: '1rem 0rem 1.5rem 0rem', fontWeight: 'bold' }}
-                onClick={() => router.push('/portfolio')} variant='outline-light'>
-                See your portfolio.
+                onClick={() => router.push(userLog ? '/portfolio' : '/login')} variant='outline-light'>
+                See your portfolio
               </Button>
             </div>
           </div>
