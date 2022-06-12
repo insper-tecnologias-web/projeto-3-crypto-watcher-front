@@ -23,8 +23,6 @@ export default function Login() {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        console.log(`Email: ${username}`);
-        console.log(`Password: ${password}`);
         if (!username || !password) {
             alert('Please fill in all fields');
             return;
@@ -86,7 +84,7 @@ export default function Login() {
                     </Button>
                 </Form>
             </div>
-            <h3 className={styles.accountText}>Don't have an account yet?{' '}
+            <h3 className={styles.accountText}>{"Don't"} have an account yet?{' '}
                 <Link href='/register'><a className={styles.registerText}>register</a></Link>
             </h3>
         </div >
