@@ -6,14 +6,17 @@ import moment from 'moment'
 import { useRouter } from 'next/router'
 import styles from '../../styles/crypto.module.css'
 import AppBar from '../../components/appbar';
+import axios from 'axios';
 
 
-export default function CryptoPage({ currency }) {
+export default function CryptoPage({ currency, balance }) {
   const [values, setValues] = useState([])
   const router = useRouter()
   const cripto = router.query.cid
   const [cryptoData, setCrytoData] = useState('')
   const [symbol, setSymbol] = useState('')
+  const [balanceCrypto, setBalanceCrypto] = useState(0)
+
   useEffect(() => {
     let listValues = []
     for (let value of currency) {
@@ -29,6 +32,11 @@ export default function CryptoPage({ currency }) {
         setCrytoData(res.data)
         setSymbol(res.data.symbol)
       });
+    for (let value of balance) {
+      if (value.crypto === cripto) {
+        setBalanceCrypto(value.quantity)
+      }
+    }
   }, [])
 
   return (
@@ -48,13 +56,18 @@ export default function CryptoPage({ currency }) {
           <div className={styles.info_title}>
             <h2 style={{ marginTop: 0 }}>{cryptoData.name}</h2>
             <h4> Balance:</h4>
-            <h5> 10 {cryptoData.symbol}</h5>
-            <p style={{ color: "rgb(177, 177, 177)" }}> ≈ $ 10</p>
+            <h5> {balanceCrypto} {cryptoData.symbol}</h5>
+            <p style={{ color: "rgb(177, 177, 177)" }}> ≈ $ {
+              cryptoData.priceUsd < 1 ? (cryptoData.priceUsd*balanceCrypto) :
+                (Math.round(balanceCrypto * cryptoData.priceUsd * 1000) / 1000).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+            }
+            </p>
           </div>
           <div className={styles.info_content}>
             <div className={styles.info_content_item}>
               <h4 className={styles.info_content_title}>Price USD:</h4>
-              <p className={styles.info_content_value}>$ {(Math.round(cryptoData.priceUsd * 100) / 100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</p>
+              <p className={styles.info_content_value}>$ {cryptoData.priceUsd < 1 ? (cryptoData.priceUsd) :
+                (Math.round(cryptoData.priceUsd * 1000) / 1000).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</p>
               <h4 className={styles.info_content_title}>Price Change 24h:</h4>
               <p style={{ color: cryptoData.changePercent24Hr > 0 ? 'green' : 'red', fontWeight: '700' }}>
                 {(Math.round(cryptoData.changePercent24Hr * 100) / 100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}%
@@ -72,7 +85,7 @@ export default function CryptoPage({ currency }) {
 }
 
 export async function getStaticPaths() {
-  const currencies = await fetch('https://api.coincap.io/v2/assets', { Authorization: "Bearer " + process.env.API_KEY }).then(res => res.json());
+  const currencies = await fetch('https://api.coincap.io/v2/assets', { 'Authorization': "Bearer " + process.env.API_KEY }).then(res => res.json());
   const paths = currencies.data.map(currency => {
     const currencyId = currency.id.toLowerCase();
     return {
@@ -88,10 +101,13 @@ export async function getStaticPaths() {
 }
 export async function getStaticProps({ params }) {
   const currencyId = params.cid
-  const results = await fetch(`https://api.coincap.io/v2/assets/${currencyId}/history?interval=d1`, { Authorization: "Bearer " + process.env.API_KEY }).then(res => res.json());
+  const results = await fetch(`https://api.coincap.io/v2/assets/${currencyId}/history?interval=d1`, { headers: { Authorization: "Bearer " + process.env.API_KEY } }).then(res => res.json());
+  const balance = await axios.get('https://infinite-eyrie-41468.herokuapp.com/cryptos', { headers: { Authorization: "Bearer " + process.env.BACK_KEY } });
+
   return {
     props: {
-      currency: results.data
+      currency: results.data,
+      balance: balance.data
     }
   }
 }

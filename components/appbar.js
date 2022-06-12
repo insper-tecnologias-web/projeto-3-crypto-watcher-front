@@ -18,9 +18,10 @@ export default function AppBar() {
             </div>
             <div className={styles.AppBar_wallet} onClick={() => router.push({
                 pathname: '/portfolio',
-                query: user
+                query: { 'user': JSON.stringify(user) },
             })}>
                 <Image src="/carteira.png" alt="Wallet" width={50} height={50} />
+                {router.pathname !== '/portfolio' && <Image src="/carteira.png" alt="Wallet" width={50} height={50} />}
             </div>
         </div >
     );
