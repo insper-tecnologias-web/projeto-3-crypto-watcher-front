@@ -8,7 +8,7 @@
 [![Product Name Screen Shot][product-screenshot]](https://example.com)
 
 CryptoWatchers is a project made for tracking crypto prices and managing portfolio, it was made also for the last project of the Web Technologies subject at Insper. You can see the demo live demo at **cryptowatchers.vercel.app/**.
-To see the backend of the project, [click here](https://github.com/guifl2001/projeto-3-crypto-watcher-backend).
+To see the backend of the project, [click here](https://github.com/RicardoRibeiroRodrigues/cryptowatchers-backend).
 
 ### Built With
 
@@ -39,6 +39,15 @@ npm run dev
 
 <!-- USAGE EXAMPLES -->
 ## Usage
+
+Feature list:
+- CRUD made in django (1pt);
+- User authentication (2pts);
+- FrontEnd made with next.js (2pts);
+- Adding cryptos to your portifolio (1pt);
+- Managing the user's crypto portifolio (1pt);
+- Graphs for the cryptos in the crypto page (2pts);
+- Listing cryptos from the coinCap API (1pt).
 
 This project offer many features, some are listed below:
 - Seeing the main cryptos and their price/price variation:

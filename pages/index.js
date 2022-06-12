@@ -1,19 +1,24 @@
 import Head from 'next/head';
 import Link from 'next/link';
 import Button from 'react-bootstrap/Button';
-import { useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import styles from '../styles/Home.module.css';
 import AppBar from '../components/appbar';
 import Footer from '../components/footer';
+import { useRouter } from 'next/router';
+import axios from 'axios';
 
 function formatNumber(num) {
   return num.toLocaleString('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 8 });
 }
 
 export default function Home({ data }) {
+  const [userLog, setUserLog] = useState(false);
+  const [userCryptos, setUserCryptos] = useState([]);
   const ref = useRef(null);
   const scrollToMain = () => ref.current.scrollIntoView(true, { behavior: 'smooth' });
   const allCoins = data.data;
+  const router = useRouter();
 
   const TrendArrow = ({ change }) => {
     if (change > 0) {
@@ -26,6 +31,19 @@ export default function Home({ data }) {
       </svg>);
     }
   }
+
+  useEffect(() => {
+    setUserLog(window.sessionStorage.getItem('userToken'));
+    if (userLog) {
+      axios.get('http://localhost:8000/api/cryptos/', { headers: { 'Authorization': `Token ${userLog}` } })
+        .then((res) => {
+          console.log(res.data);
+          setUserCryptos(res.data);
+        }).catch((err) => {
+          console.log(err);
+        });
+    }
+  }, [router.query.slug, userLog]);
 
   return (
     <div className={styles.container}>
@@ -62,6 +80,16 @@ export default function Home({ data }) {
               </div>
             ))}
           </div>
+          {userCryptos.map(item => (
+            <div className={`${styles.glass} ${styles.card}`} key={`Item__${item.id}`}>
+              <h3 style={{ marginTop: '0.7rem', alignSelf: 'center' }}>{item['crypto_id']}</h3>
+              <p>Quantidade: {item.quantity}</p>
+              <p>Preco: </p>
+              <Link href={`crypto/${item['crypto_id']}`}>
+                <Button variant="outline-light">See details</Button>
+              </Link>
+            </div>
+          ))}
         </div>
       </main >
       <Footer></Footer>
