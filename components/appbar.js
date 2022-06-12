@@ -3,12 +3,9 @@ import styles from '../styles/AppBar.module.css';
 import { useRouter } from "next/router";
 
 
-export default function AppBar() {
+export default function AppBar({ userLogged }) {
     const router = useRouter();
-    const user = {
-        id: 1,
-        email: "pedro@gmail.com",
-    };
+    const pathName = userLogged ? '/portfolio' : '/login';
 
     return (
         <div className={styles.AppBar}  >
@@ -17,10 +14,12 @@ export default function AppBar() {
                 <h1 className={styles.AppBar_title}>CryptoWatchers</h1>
             </div>
             <div className={styles.AppBar_wallet} onClick={() => router.push({
-                pathname: '/portfolio',
-                query: { 'user': JSON.stringify(user) },
+                pathname: pathName,
             })}>
-                {router.pathname !== '/portfolio' && <Image src="/carteira.png" alt="Wallet" width={50} height={50} />}
+                {(router.pathname !== '/portfolio' && userLogged) &&
+                    <Image src="/carteira.png" alt="Wallet" width={50} height={50} />}
+                {!userLogged &&
+                    <Image src="/perfil.png" alt="Wallet" width={50} height={50} className={styles.borderCircle} />}
             </div>
         </div >
     );

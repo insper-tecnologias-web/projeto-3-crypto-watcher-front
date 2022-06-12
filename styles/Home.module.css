@@ -119,9 +119,7 @@
 
 .styleCenter {
   display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
   width: 100%;
   flex-wrap: wrap;
   margin-top: 1rem;
@@ -160,5 +158,28 @@
   border-radius: 10px;
   padding: 0.1rem;
   display: flex;
+  align-items: center;
+}
+
+.mainCryptosCard {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+  background: rgba(100, 100, 100, 0.25);
+  background-image: linear-gradient(to right, var(--bg-color), #2b2b2b);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.05);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.landingPages {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
 }

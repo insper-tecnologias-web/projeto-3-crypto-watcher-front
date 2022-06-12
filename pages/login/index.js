@@ -36,6 +36,7 @@ export default function Login() {
         };
         await axios.post(url, data).then((response) => {
             window.sessionStorage.setItem('userToken', response.data.token);
+            window.sessionStorage.setItem('username', username);
             router.push("/");
         }).catch((error) => {
             if (error.response.status === 403) {
