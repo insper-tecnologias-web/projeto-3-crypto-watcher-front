@@ -47,3 +47,7 @@
     padding-right: 1rem;
     margin-bottom: 0.25rem;
 }
+
+.borderCircle {
+    border-radius: 9999px;
+}
