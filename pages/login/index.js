@@ -8,13 +8,13 @@ import styles from '../../styles/LoginPage.module.css';
 import { useRouter } from 'next/router';
 
 export default function Login() {
-    const [email, setEmail] = useState('');
+    const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
     const router = useRouter();
 
-    const handleEmailChange = (event) => {
-        setEmail(event.target.value);
+    const handleUsernameChange = (event) => {
+        setUsername(event.target.value);
     };
 
     const handlePasswordChange = (event) => {
@@ -23,19 +23,25 @@ export default function Login() {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        console.log(`Email: ${email}`);
+        console.log(`Email: ${username}`);
         console.log(`Password: ${password}`);
-        const url = 'http://localhost:8000/api/token/';
+        if (!username || !password) {
+            alert('Please fill in all fields');
+            return;
+        }
+        const url = 'https://cryptic-bastion-47088.herokuapp.com/api/token/';
         const data = {
-            email: email,
+            username: username,
             password: password,
         };
-
         await axios.post(url, data).then((response) => {
-            console.log(response.data);
             window.sessionStorage.setItem('userToken', response.data.token);
+            router.push("/");
+        }).catch((error) => {
+            if (error.response.status === 403) {
+                alert("Invalid username or password");
+            }
         });
-        router.push("/");
     };
 
 
@@ -50,7 +56,7 @@ export default function Login() {
                 <Form className={styles.formContainer}>
                     <Form.Group className={`mb-3 ${styles.formGroup}`} controlId="formBasicEmail">
                         <Form.Label>
-                            Email address
+                            Username
                         </Form.Label>
                         <InputGroup >
                             <InputGroup.Text className={styles.iconContainer} id="basic-addon1">
@@ -58,8 +64,8 @@ export default function Login() {
                                     <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
                                 </svg>
                             </InputGroup.Text>
-                            <Form.Control onChange={handleEmailChange}
-                                className={styles.inputStyle} type="email" placeholder="Enter email" />
+                            <Form.Control onChange={handleUsernameChange}
+                                className={styles.inputStyle} type="text" placeholder="Enter username" />
                         </InputGroup>
                     </Form.Group>
                     <Form.Group className={`mb-3 ${styles.formGroup}`} controlId="formBasicPassword">
