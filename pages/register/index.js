@@ -32,9 +32,6 @@ export default function Register() {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        console.log(`Email: ${email}`);
-        console.log(`Username: ${username}`);
-        console.log(`Password: ${password}`);
         if (validateEmail(email) === false) {
             alert('Please enter a valid email');
             return;
