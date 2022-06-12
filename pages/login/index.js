@@ -1,15 +1,17 @@
-import styles from '../../styles/LoginPage.module.css';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Link from 'next/link';
 import { useState } from 'react';
 import axios from 'axios';
+import styles from '../../styles/LoginPage.module.css';
+import { useRouter } from 'next/router';
 
 export default function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [error, setError] = useState('');
+
+    const router = useRouter();
 
     const handleEmailChange = (event) => {
         setEmail(event.target.value);
@@ -19,65 +21,21 @@ export default function Login() {
         setPassword(event.target.value);
     };
 
-    const res = async () => {
-        return await axios.post(
-            "https://infinite-eyrie-41468.herokuapp.com/users/sign_in",
-            {
-                "user": {
-                    "email": "test3@test.com",
-                    "password": "senha123"
-                }
-            },
-        ).then(response => response.headers.authorization)
-    };
-
     const handleSubmit = async (event) => {
         event.preventDefault();
         console.log(`Email: ${email}`);
         console.log(`Password: ${password}`);
-        const url = 'https://infinite-eyrie-41468.herokuapp.com/users/sign_in';
+        const url = 'http://localhost:8000/api/token/';
         const data = {
-            "user": {
-                email: email,
-                password: password,
-            }
+            email: email,
+            password: password,
         };
-        axios.post(url, { user: { email: email, password: password } }, {
-            withCredentials: true,
-            headers: { "Access-Control-Allow-*": "true" }
-        })
-            .then(response => {
-                if (response.data.errors) {
-                    setError(response.data.errors)
-                }
-                else {
-                    setError("")
-                    localStorage.setItem("token", response.data.jwt)
-                }
-            });
 
-        res();
-
-
-        // const res = await axios.post('https://infinite-eyrie-41468.herokuapp.com/users/sign_in',
-        //     {
-        //         "user": {
-        //             "email": "test3@test.com",
-        //             "password": "senha123"
-        //         }
-        //     }).then(response => console.log(response.headers));
-
-
-        const response = await fetch("https://infinite-eyrie-41468.herokuapp.com/users/sign_in", {
-            method: "POST",
-            body: JSON.stringify(data),
-            headers: {
-                "Content-Type": "application/json",
-            },
+        await axios.post(url, data).then((response) => {
+            console.log(response.data);
+            window.sessionStorage.setItem('userToken', response.data.token);
         });
-        console.log(response.headers);
-        // const dados = await response.json();
-        // console.log(dados);
+        router.push("/");
     };
 
 
@@ -117,7 +75,7 @@ export default function Login() {
                         </InputGroup>
                     </Form.Group>
                     <Button onClick={handleSubmit} style={{ marginTop: '1rem' }} variant="primary" type="submit">
-                        Submit
+                        Login
                     </Button>
                 </Form>
             </div>
