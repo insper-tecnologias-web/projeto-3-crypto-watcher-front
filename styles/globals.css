@@ -1,5 +1,6 @@
 :root {
   --medium-emphasis: rgba(255, 255, 255, 0.6);
+  --bg-color: #2A2A2A;
 }
 
 html,
@@ -9,7 +10,7 @@ body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-  background-color: #2A2A2A;
+  background-color: var(--bg-color);
 }
 
 a {
