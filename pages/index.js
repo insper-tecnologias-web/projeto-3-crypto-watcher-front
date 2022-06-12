@@ -1,19 +1,49 @@
 import Head from 'next/head';
 import Link from 'next/link';
 import Button from 'react-bootstrap/Button';
-import { useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import styles from '../styles/Home.module.css';
 import AppBar from '../components/appbar';
 import Footer from '../components/footer';
+import { useRouter } from 'next/router';
+import axios from 'axios';
 
 function formatNumber(num) {
   return num.toLocaleString('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 8 });
 }
 
 export default function Home({ data }) {
+  const [userLog, setUserLog] = useState(false);
+  const [userCryptos, setUserCryptos] = useState([]);
   const ref = useRef(null);
-  console.log(data.data[0]);
   const scrollToMain = () => ref.current.scrollIntoView(true, { behavior: 'smooth' });
+  const allCoins = data.data;
+  const router = useRouter();
+
+  const TrendArrow = ({ change }) => {
+    if (change > 0) {
+      return (<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-arrow-up" viewBox="0 0 16 16">
+        <path fillRule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z" />
+      </svg>);
+    } else if (change < 0) {
+      return (<svg style={{}} xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-arrow-down" viewBox="0 0 16 16">
+        <path fillRule="evenodd" d="M8 1a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L7.5 13.293V1.5A.5.5 0 0 1 8 1z" />
+      </svg>);
+    }
+  }
+
+  useEffect(() => {
+    setUserLog(window.sessionStorage.getItem('userToken'));
+    if (userLog) {
+      axios.get('http://localhost:8000/api/cryptos/', { headers: { 'Authorization': `Token ${userLog}` } })
+        .then((res) => {
+          console.log(res.data);
+          setUserCryptos(res.data);
+        }).catch((err) => {
+          console.log(err);
+        });
+    }
+  }, [router.query.slug, userLog]);
 
   return (
     <div className={styles.container}>
@@ -36,11 +66,12 @@ export default function Home({ data }) {
         <div style={{ marginTop: '0.5rem' }} ref={ref}>
           <h2 style={{ marginTop: '1.5rem' }}><b>Main cryptos: </b></h2>
           <div className={styles.styleCenter}>
-            {data.data.slice(0, 20).map(item => (
+            {allCoins.slice(0, 20).map(item => (
               <div className={`${styles.glass} ${styles.card}`} key={`Item__${item.id}`}>
                 <h3 style={{ marginTop: '0.7rem', alignSelf: 'center' }}>{item.name} ({item.symbol})</h3>
                 <p className={styles.percentChange} style={{ color: (item.changePercent24Hr > 0) ? 'green' : 'red' }}>
-                  {parseFloat(item.changePercent24Hr).toFixed(2)} %
+                  <TrendArrow change={item.changePercent24Hr} />
+                  {Math.abs(parseFloat(item.changePercent24Hr).toFixed(2))} %
                 </p>
                 <p>{formatNumber(parseFloat(item.priceUsd))}</p>
                 <Link href={`crypto/${item.id}`}>
@@ -49,6 +80,16 @@ export default function Home({ data }) {
               </div>
             ))}
           </div>
+          {userCryptos.map(item => (
+            <div className={`${styles.glass} ${styles.card}`} key={`Item__${item.id}`}>
+              <h3 style={{ marginTop: '0.7rem', alignSelf: 'center' }}>{item['crypto_id']}</h3>
+              <p>Quantidade: {item.quantity}</p>
+              <p>Preco: </p>
+              <Link href={`crypto/${item['crypto_id']}`}>
+                <Button variant="outline-light">See details</Button>
+              </Link>
+            </div>
+          ))}
         </div>
       </main >
       <Footer></Footer>
