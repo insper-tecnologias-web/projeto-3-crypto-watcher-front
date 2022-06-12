@@ -9,13 +9,18 @@ import AppBar from '../../components/appbar';
 import axios from 'axios';
 
 
-export default function CryptoPage({ currency, balance }) {
+export default function CryptoPage({ currency }) {
   const [values, setValues] = useState([])
   const router = useRouter()
-  const cripto = router.query.cid
+  const crypto = router.query.cid
   const [cryptoData, setCrytoData] = useState('')
   const [symbol, setSymbol] = useState('')
   const [balanceCrypto, setBalanceCrypto] = useState(0)
+  const [userLog, setUserLog] = useState('');
+
+  useEffect(() => {
+    setUserLog(window.sessionStorage.getItem('userToken'));
+  }, [router.query.slug, userLog]);
 
   useEffect(() => {
     let listValues = []
@@ -26,19 +31,28 @@ export default function CryptoPage({ currency, balance }) {
       })
     }
     setValues(listValues)
-    fetch('https://api.coincap.io/v2/assets/' + cripto, { Authorization: "Bearer " + process.env.API_KEY })
+    fetch('https://api.coincap.io/v2/assets/' + crypto, { Authorization: "Bearer " + process.env.API_KEY })
       .then(res => res.json())
       .then(res => {
         setCrytoData(res.data)
         setSymbol(res.data.symbol)
       });
-    for (let value of balance) {
-      if (value.crypto === cripto) {
-        setBalanceCrypto(value.quantity)
-      }
-    }
-  }, [])
 
+
+  }, [])
+  useEffect(() => {
+    if (userLog) {
+      axios.get('https://cryptic-bastion-47088.herokuapp.com/api/cryptos/', {
+        headers: { Authorization: "Token " + userLog }
+      }).then(response => {
+        for (let cryptocurrency of response.data) {
+          if (cryptocurrency.crypto_id === crypto) {
+            setBalanceCrypto(cryptocurrency.quantity)
+          }
+        }
+      });
+    }
+  }, [userLog])
   return (
     <div>
       <Head>
@@ -58,7 +72,7 @@ export default function CryptoPage({ currency, balance }) {
             <h4> Balance:</h4>
             <h5> {balanceCrypto} {cryptoData.symbol}</h5>
             <p style={{ color: "rgb(177, 177, 177)" }}> ≈ $ {
-              cryptoData.priceUsd < 1 ? (cryptoData.priceUsd*balanceCrypto) :
+              cryptoData.priceUsd < 1 ? (cryptoData.priceUsd * balanceCrypto) :
                 (Math.round(balanceCrypto * cryptoData.priceUsd * 1000) / 1000).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
             }
             </p>
@@ -102,12 +116,10 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }) {
   const currencyId = params.cid
   const results = await fetch(`https://api.coincap.io/v2/assets/${currencyId}/history?interval=d1`, { headers: { Authorization: "Bearer " + process.env.API_KEY } }).then(res => res.json());
-  const balance = await axios.get('https://infinite-eyrie-41468.herokuapp.com/cryptos', { headers: { Authorization: "Bearer " + process.env.BACK_KEY } });
 
   return {
     props: {
       currency: results.data,
-      balance: balance.data
     }
   }
 }
