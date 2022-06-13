@@ -110,6 +110,7 @@ export default function Userportfolio({allCryptos}) {
 								<th>price Usd</th>
 								<th>buying_price</th>
 								<th>changePercent24Hr</th>
+								<th>Profit</th>
 								<th>Details</th>
 								<th>#</th>
 							</tr>
@@ -124,6 +125,7 @@ export default function Userportfolio({allCryptos}) {
 								<td>{coin.dadosapi.priceUsd}</td>
 								<td>{coin.moedauser.buying_price}</td>
 								<td>{parseFloat(coin.dadosapi.changePercent24Hr).toFixed(2)} %</td>
+								<td>{coin.dadosapi.priceUsd*coin.moedauser.quantity - coin.moedauser.buying_price*coin.moedauser.quantity}</td>
 								<td>{coin.moedauser.notes}</td>
 								<td>
 									<Link href={`crypto/${coin.moedauser.crypto_id}`}>
