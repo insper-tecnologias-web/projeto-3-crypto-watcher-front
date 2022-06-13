@@ -37,9 +37,7 @@ export default function CryptoPage({ currency }) {
         setCrytoData(res.data)
         setSymbol(res.data.symbol)
       });
-
-
-  }, [])
+  }, [crypto, currency])
   useEffect(() => {
     if (userLog) {
       axios.get('https://cryptic-bastion-47088.herokuapp.com/api/cryptos/', {
@@ -52,7 +50,7 @@ export default function CryptoPage({ currency }) {
         }
       });
     }
-  }, [userLog])
+  }, [userLog, crypto])
   return (
     <div>
       <Head>
