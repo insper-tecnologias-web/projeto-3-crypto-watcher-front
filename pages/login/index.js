@@ -6,6 +6,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import styles from '../../styles/LoginPage.module.css';
 import { useRouter } from 'next/router';
+import Head from 'next/head';
 
 export default function Login() {
     const [username, setUsername] = useState('');
@@ -47,6 +48,12 @@ export default function Login() {
 
     return (
         <div className={styles.container}>
+            <Head>
+                <title>CryptoWatchers - Login</title>
+                <meta name="description" content="Login page to the crypto dashboard" />
+                <link rel="icon" href="/favicon.ico" />
+                <meta name="viewport" content="width=device-width, initial-scale=1" />
+            </Head>
             <h1 style={{ fontWeight: 'bold', marginTop: '1rem', color: 'rgba(255, 255, 255, 0.9)' }}>
                 Please login to acess all the features.
             </h1>

@@ -40,7 +40,7 @@ npm run dev
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-Feature list:
+**Feature list:**
 - CRUD made in django (1pt);
 - User authentication (2pts);
 - FrontEnd made with next.js (2pts);
@@ -48,6 +48,8 @@ Feature list:
 - Managing the user's crypto portifolio (1pt);
 - Graphs for the cryptos in the crypto page (2pts);
 - Listing cryptos from the coinCap API (1pt).
+
+**For the roadmap of this project, please refer to [projects](https://github.com/insper-tecnologias-web/projeto-3-crypto-watcher-front/projects)**
 
 This project offer many features, some are listed below:
 - Seeing the main cryptos and their price/price variation:

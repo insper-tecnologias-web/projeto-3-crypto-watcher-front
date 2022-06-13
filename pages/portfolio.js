@@ -8,6 +8,7 @@ import axios from 'axios';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import styles from '../styles/portfolio.module.css';
+import Head from 'next/head';
 
 export default function Userportfolio({ allCryptos }) {
 	const router = useRouter();
@@ -107,8 +108,23 @@ export default function Userportfolio({ allCryptos }) {
 
 	return (
 		<div>
+			<Head>
+				<title>CryptoWatchers - Portfolio</title>
+				<meta name="description" content="Portfolio page of the crypto dashboard" />
+				<link rel="icon" href="/favicon.ico" />
+				<meta name="viewport" content="width=device-width, initial-scale=1" />
+			</Head>
 			<AppBar></AppBar>
-			{userName && <h1 style={{ display: 'block', margin: 'auto', width: '30%' }}>{userName}{"'s"} portfolio</h1>}
+			<div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
+				{userName && <h1>{userName}{"'s"} portfolio</h1>}
+				<Button style={{ marginLeft: '2rem' }} variant="danger" onClick={() => {
+					window.sessionStorage.removeItem('userToken');
+					window.sessionStorage.removeItem('username');
+					router.push("/");
+				}}>
+					Log out
+				</Button>
+			</div>
 			<div className={styles.container}>
 				<Table style={{ margin: '1rem 0.5rem 2rem 0.5rem' }} striped bordered hover variant="dark">
 					<thead>
@@ -116,34 +132,44 @@ export default function Userportfolio({ allCryptos }) {
 							<th>Ranking</th>
 							<th>Ticker</th>
 							<th>Name</th>
-							<th>Quantity</th>
+							<th>Paid amount(usd)</th>
 							<th>Price now(Usd)</th>
-							<th>Buying price</th>
 							<th>Change in 24h(%)</th>
-							<th>Profit</th>
+							<th>Profit(Usd)</th>
 							<th>Details</th>
 							<th>#</th>
 						</tr>
 					</thead>
 					<tbody>
-						{lista.map((coin) => (
-							<tr key={coin.moedauser.id}>
-								<td>{coin.dadosapi.rank}</td>
-								<td>{coin.dadosapi.symbol}</td>
-								<td>{coin.moedauser.crypto_id}</td>
-								<td>{coin.moedauser.quantity}</td>
-								<td>{coin.dadosapi.priceUsd}</td>
-								<td>{coin.moedauser.buying_price}</td>
-								<td>{parseFloat(coin.dadosapi.changePercent24Hr).toFixed(2)} %</td>
-								<td>{coin.dadosapi.priceUsd * coin.moedauser.quantity - coin.moedauser.buying_price * coin.moedauser.quantity}</td>
-								<td>{coin.moedauser.notes}</td>
-								<td>
-									<Link href={`/crypto/${coin.moedauser.crypto_id}`}>
-										<Button variant="outline-light">See details</Button>
-									</Link>
-								</td>
-							</tr>
-						))}
+						{lista.map((coin) => {
+							let profit = (coin.dadosapi.priceUsd * coin.moedauser.quantity - coin.moedauser.buying_price * coin.moedauser.quantity);
+							let profitFormatted = Math.abs(profit) < 1 ? profit : (Math.round(profit * 1000) / 1000).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+							let paidAmount = coin.moedauser.buying_price * coin.moedauser.quantity;
+							paidAmount = Math.abs(paidAmount) < 1 ? paidAmount : (Math.round(paidAmount * 1000) / 1000).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+							return (
+								<tr key={coin.moedauser.id}>
+									<td>{coin.dadosapi.rank}</td>
+									<td>{coin.dadosapi.symbol}</td>
+									<td>{coin.moedauser.crypto_id}</td>
+									<td>{paidAmount}</td>
+									<td>
+										{coin.dadosapi.priceUsd < 1 ?
+											(coin.dadosapi.priceUsd) :
+											(Math.round(coin.dadosapi.priceUsd * 1000) / 1000)
+												.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+									</td>
+									<td style={{ color: (profit > 0 ? "green" : "red") }}>{parseFloat(coin.dadosapi.changePercent24Hr).toFixed(2)} %</td>
+									<td style={{ color: (profit > 0 ? "green" : "red") }}>{profitFormatted}</td>
+									<td>{coin.moedauser.notes}</td>
+									<td>
+										<Link href={`/crypto/${coin.moedauser.crypto_id}`}>
+											<Button variant="outline-light">See details</Button>
+										</Link>
+									</td>
+								</tr>
+							)
+						}
+						)}
 					</tbody>
 				</Table>
 
