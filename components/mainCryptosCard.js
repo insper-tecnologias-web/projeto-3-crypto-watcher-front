@@ -22,7 +22,7 @@ export default function MainCryptosCard({ allCoins }) {
 
     return (
         <div className={styles.mainCryptosCard}>
-            {allCoins.slice(0, 20).map(item => (
+            {allCoins.slice(0, 40).map(item => (
                 <div className={`${styles.glass} ${styles.card}`} key={`Item__${item.id}`}>
                     <h3 style={{ marginTop: '0.7rem', alignSelf: 'center' }}>{item.name} ({item.symbol})</h3>
                     <p className={styles.percentChange}
