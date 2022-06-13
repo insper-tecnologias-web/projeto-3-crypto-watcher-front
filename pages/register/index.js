@@ -5,6 +5,7 @@ import axios from 'axios';
 import { useState } from 'react';
 import styles from '../../styles/RegisterPage.module.css';
 import { useRouter } from 'next/router';
+import Head from 'next/head';
 
 export default function Register() {
     const [email, setEmail] = useState('');
@@ -64,6 +65,12 @@ export default function Register() {
 
     return (
         <div className={styles.container}>
+            <Head>
+                <title>CryptoWatchers - Register</title>
+                <meta name="description" content="Register page to the crypto dashboard" />
+                <link rel="icon" href="/favicon.ico" />
+                <meta name="viewport" content="width=device-width, initial-scale=1" />
+            </Head>
             <div className={styles.formPaper}>
                 <h2 style={{ fontWeight: 'bold' }}>Register</h2>
                 <Form className={styles.formContainer}>

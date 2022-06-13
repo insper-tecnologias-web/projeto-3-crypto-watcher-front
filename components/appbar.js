@@ -18,7 +18,7 @@ export default function AppBar({ userLogged }) {
             })}>
                 {(router.pathname !== '/portfolio' && userLogged) &&
                     <Image src="/carteira.png" alt="Wallet" width={50} height={50} />}
-                {(!userLogged && router.pathname !== '/portfolio') &&
+                {(!userLogged && router.pathname !== '/portfolio' && !router.pathname.includes('crypto/')) &&
                     <Image src="/perfil.png" alt="Wallet" width={50} height={50} className={styles.borderCircle} />}
             </div>
         </div >
