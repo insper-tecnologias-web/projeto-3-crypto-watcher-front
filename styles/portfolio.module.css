@@ -8,10 +8,27 @@
     margin-top: 1.25rem;
     color: var(--medium-emphasis);
     font-size: 1.25rem;
+    margin-bottom: 2rem;
 }
 
 .container {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.inputStyle {
+    background-color: rgb(60, 60, 60, 1);
+    color: white;
+    font-size: 1.4rem;
+    border: none;
+    border-bottom: 2px solid var(--medium-emphasis);
+}
+
+.inputStyle:focus {
+    background-color: rgb(58, 58, 58, 1);
+    caret-color: white;
+    color: rgba(255, 255, 255, 0.8);
+    box-shadow: none;
+    border-bottom: solid #0070f3;
 }
