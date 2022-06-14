@@ -43,11 +43,13 @@ export default function CryptoPage({ currency }) {
       axios.get('https://cryptic-bastion-47088.herokuapp.com/api/cryptos/', {
         headers: { Authorization: "Token " + userLog }
       }).then(response => {
+        let balance = 0;
         for (let cryptocurrency of response.data) {
           if (cryptocurrency.crypto_id === crypto) {
-            setBalanceCrypto(cryptocurrency.quantity)
+            balance += cryptocurrency.quantity
           }
         }
+        setBalanceCrypto(balance)
       });
     }
   }, [userLog, crypto])
