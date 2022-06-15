@@ -47,9 +47,11 @@ npm run dev
 - Adding cryptos to your portifolio (1pt);
 - Managing the user's crypto portifolio (1pt);
 - Graphs for the cryptos in the crypto page (2pts);
-- Listing cryptos from the coinCap API (1pt).
+- Listing cryptos from the coinCap API (1pt).         
 
-**For the roadmap of this project, please refer to [projects](https://github.com/insper-tecnologias-web/projeto-3-crypto-watcher-front/projects)**
+The features where made based on [this architecture](https://github.com/insper-tecnologias-web/projeto-3-crypto-watcher-front/blob/main/ArquiteturaProjeto.jpeg).
+
+### **For the roadmap of this project, please refer to [projects](https://github.com/insper-tecnologias-web/projeto-3-crypto-watcher-front/projects)**
 
 ### This project offer many features, some are listed below:
 - Seeing the main cryptos and their price/price variation:
